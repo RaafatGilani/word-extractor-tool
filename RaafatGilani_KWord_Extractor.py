@@ -6,17 +6,17 @@ import os
 # %%
 # Putting dictionary file content as split string into variables--to be used later.
 
-UHwords = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/UHwords.txt', "r").read().split()
+UHwords = open('/Users/raafatgilani/Documents/GitHub/word-extractor/UHwords.txt', "r").read().split()
 UHwords = set(UHwords)
-Ewords = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/Ewords.txt', "r").read().split()
+Ewords = open('/Users/raafatgilani/Documents/GitHub/word-extractor/Ewords.txt', "r").read().split()
 Ewords = set(Ewords)
-Pwords = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/Pwords.txt', "r").read().split()
+Pwords = open('/Users/raafatgilani/Documents/GitHub/word-extractor/Pwords.txt', "r").read().split()
 Pwords = set(Pwords)
-Cwords = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/CWords.txt', "r").read().split()
+Cwords = open('/Users/raafatgilani/Documents/GitHub/word-extractor/CWords.txt', "r").read().split()
 Cwords = set(Cwords)
-JKnames = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/JKnames.txt', "r").read().split()
+JKnames = open('/Users/raafatgilani/Documents/GitHub/word-extractor/JKnames.txt', "r").read().split()
 JKnames = set(JKnames)
-Kwords = open('/Users/raafatgilani/Desktop/DH Paper Project/Dictionaries/Kwords.txt', "r").read().split()
+Kwords = open('/Users/raafatgilani/Documents/GitHub/word-extractor/Kwords.txt', "r").read().split()
 Kwords = set(Kwords)
 
 # %%
