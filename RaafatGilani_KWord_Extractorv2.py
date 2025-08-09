@@ -1,7 +1,7 @@
 # %%
 import streamlit as st
 
-
+import string
 import re
 import os
 
@@ -72,7 +72,7 @@ def nonEnglish(cleantext):
 nonEnglish(cleantext)
 
 st.write("File uploaded successfully!")
-st.text_area("File Content Preview", text, height=300)import string
+st.text_area("File Content Preview", text, height=300)
 
 
 
