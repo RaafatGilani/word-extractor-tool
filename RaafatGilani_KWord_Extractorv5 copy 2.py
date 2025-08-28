@@ -31,9 +31,9 @@ st.title("Kashmiri Word Extractor")
 mode = st.radio("Choose extraction mode:","All Non-English words*", "Kashmiri words only*")
 
 uploaded_file = st.file_uploader("Upload a TXT file", type=["txt"])
-text = uploaded_file
+text = uploaded_file.read().decode("utf-8")
 
-if st.radio == "All non-English words*":
+if mode == "All non-English words*":
     text = re.sub(r"http\S+", "", text)                    # Remove URLs
     text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
     text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
@@ -86,7 +86,7 @@ if st.radio == "All non-English words*":
         file_name="extracted_non_english_words.csv",
         mime="text/csv"
     )
-elif st.radio == "Kashmiri words only*":
+elif mode == "Kashmiri words only*":
     text = re.sub(r"http\S+", "", text)                    # Remove URLs
     text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
     text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
@@ -108,7 +108,7 @@ elif st.radio == "Kashmiri words only*":
                 continue
             elif word in JKnames:
                 container.append(word)
-            elif word in UHwords and Kwords:
+            elif word in UHwords and word in Kwords:
                 container.append(word)
             elif word in Kwords:
                 container.append(word)
