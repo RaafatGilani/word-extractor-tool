@@ -34,7 +34,7 @@ uploaded_file = st.file_uploader("Upload a TXT file", type=["txt"])
 
 if uploaded_file is not None:
     text = uploaded_file.read().decode("utf-8")
-    if mode == "All non-English words*":
+    if mode == "All Non-English words*":
         text = re.sub(r"http\S+", "", text)                    # Remove URLs
         text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
         text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
