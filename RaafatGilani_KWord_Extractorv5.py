@@ -26,118 +26,118 @@ Kwords = load_wordset("Kwords.txt")
 # =====================
 # 2️⃣ Streamlit UI
 # =====================
-st.title("Kashmiri Word Extractor")
+st.title("Word Extractor")
 
 mode = st.radio("Choose extraction mode:",["All Non-English words*", "Kashmiri words only*"])
 
 uploaded_file = st.file_uploader("Upload a TXT file", type=["txt"])
-text = uploaded_file.read().decode("utf-8")
 
-if mode == "All non-English words*":
-    text = re.sub(r"http\S+", "", text)                    # Remove URLs
-    text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
-    text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
-    text = re.sub(r"[‘…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
-    text = text.lower()
-    text = re.sub(r"\d+", "", text)                        # Remove digits
+if uploaded_file is not None:
+    text = uploaded_file.read().decode("utf-8")
+    if mode == "All non-English words*":
+        text = re.sub(r"http\S+", "", text)                    # Remove URLs
+        text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
+        text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
+        text = re.sub(r"[‘…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
+        text = text.lower()
+        text = re.sub(r"\d+", "", text)                        # Remove digits
 
-    cleantext = text.split()
+        cleantext = text.split()
 
-    # =====================
-    # non-English Processing Logic
-    # =====================
-    def nonEnglish(cleantext):
-        container = []
-        for word in cleantext:
-            if word in Ewords:
-                continue
-            elif word in Cwords:
-                continue
-            elif word in JKnames:
-                continue
-            elif word in UHwords:
-                container.append(word)
-            elif word in Kwords:
-                container.append(word)
-            elif word in Pwords:
-                container.append(word)
-            else:
-                container.append(word)
-        return sorted(set(container))
+        # =====================
+        # non-English Processing Logic
+        # =====================
+        def nonEnglish(cleantext):
+            container = []
+            for word in cleantext:
+                if word in Ewords:
+                    continue
+                elif word in Cwords:
+                    continue
+                elif word in JKnames:
+                    continue
+                elif word in UHwords:
+                    container.append(word)
+                elif word in Kwords:
+                    container.append(word)
+                elif word in Pwords:
+                    container.append(word)
+                else:
+                    container.append(word)
+            return sorted(set(container))
 
-    result = nonEnglish(cleantext)
+        result = nonEnglish(cleantext)
 
-    # =====================
-    # non-English Display + Download
-    # =====================
-    st.success(f"Total non-English extracted words: {len(result)}")
-    st.text_area("Extracted Words", "\n".join(result), height=300)
+        # =====================
+        # non-English Display + Download
+        # =====================
+        st.success(f"Total non-English extracted words: {len(result)}")
+        st.text_area("Extracted Words", "\n".join(result), height=300)
 
-    # Create CSV string using csv module
-    csv_buffer = StringIO()
-    writer = csv.writer(csv_buffer)
-    writer.writerow(["Extracted non-English Words"])  # header
-    for word in result:
-        writer.writerow([word])
+        # Create CSV string using csv module
+        csv_buffer = StringIO()
+        writer = csv.writer(csv_buffer)
+        writer.writerow(["Extracted non-English Words"])  # header
+        for word in result:
+            writer.writerow([word])
 
-    st.download_button(
-        label="📥 Download as CSV",
-        data=csv_buffer.getvalue(),
-        file_name="extracted_non_english_words.csv",
-        mime="text/csv"
-    )
-elif mode == "Kashmiri words only*":
-    text = re.sub(r"http\S+", "", text)                    # Remove URLs
-    text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
-    text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
-    text = re.sub(r"[‘…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
-    text = text.lower()
-    text = re.sub(r"\d+", "", text)                        # Remove digits
+        st.download_button(
+            label="📥 Download as CSV",
+            data=csv_buffer.getvalue(),
+            file_name="extracted_non_english_words.csv",
+            mime="text/csv"
+        )
+    elif mode == "Kashmiri words only*":
+        text = re.sub(r"http\S+", "", text)                    # Remove URLs
+        text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
+        text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
+        text = re.sub(r"[‘…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
+        text = text.lower()
+        text = re.sub(r"\d+", "", text)                        # Remove digits
 
-    cleantext = text.split()
+        cleantext = text.split()
 
-    # =====================
-    # Kashmiri words exclusive processing logic
-    # =====================
-    def KashmiriWords(cleantext):
-        container = []
-        for word in cleantext:
-            if word in Ewords:
-                continue
-            elif word in Cwords:
-                continue
-            elif word in JKnames:
-                container.append(word)
-            elif word in UHwords and word in Kwords:
-                container.append(word)
-            elif word in Kwords:
-                container.append(word)
-            elif word in Pwords:
-                container.append(word)
-            else:
-                container.append(word)
-        return sorted(set(container))
+        # =====================
+        # Kashmiri words exclusive processing logic
+        # =====================
+        def KashmiriWords(cleantext):
+            container = []
+            for word in cleantext:
+                if word in Ewords:
+                    continue
+                elif word in Cwords:
+                    continue
+                elif word in JKnames:
+                    container.append(word)
+                elif word in UHwords and word in Kwords:
+                    container.append(word)
+                elif word in Kwords:
+                    container.append(word)
+                elif word in Pwords:
+                    container.append(word)
+                else:
+                    container.append(word)
+            return sorted(set(container))
 
-    result = KashmiriWords(cleantext)
+        result = KashmiriWords(cleantext)
 
-    # =====================
-    # non-English Display + Download
-    # =====================
-    st.success(f"Total extracted Kashmiri words: {len(result)}")
-    st.text_area("Extracted Words", "\n".join(result), height=300)
+        # =====================
+        # non-English Display + Download
+        # =====================
+        st.success(f"Total extracted Kashmiri words: {len(result)}")
+        st.text_area("Extracted Words", "\n".join(result), height=300)
 
-    # Create CSV string using csv module
-    csv_buffer = StringIO()
-    writer = csv.writer(csv_buffer)
-    writer.writerow(["Extracted Kashmiri Words"])  # header
-    for word in result:
-        writer.writerow([word])
+        # Create CSV string using csv module
+        csv_buffer = StringIO()
+        writer = csv.writer(csv_buffer)
+        writer.writerow(["Extracted Kashmiri Words"])  # header
+        for word in result:
+            writer.writerow([word])
 
-    st.download_button(
-        label="📥 Download as CSV",
-        data=csv_buffer.getvalue(),
-        file_name="extracted_Kashmiri_words.csv",
-        mime="text/csv"
-    )
+        st.download_button(
+            label="📥 Download as CSV",
+            data=csv_buffer.getvalue(),
+            file_name="extracted_Kashmiri_words.csv",
+            mime="text/csv")
 else:
     st.info("Please upload a TXT file to begin.")  
