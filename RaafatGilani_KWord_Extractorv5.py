@@ -28,6 +28,19 @@ Kwords = load_wordset("Kwords.txt")
 # =====================
 st.title("Word Extractor")
 
+st.markdown("""
+This tool works on **dictionary-matching logic**.  
+That means occasional errors are expected: sometimes a word may be wrongly included or excluded.  
+The extractor is intentionally **tilted towards capturing more words**—better to have a few extras than to miss Kashmiri or non-English words entirely.  
+
+Although the software is primarily designed to extract **Romanized Kashmiri words**, and accuracy improvements are geared toward that, it can also be used for **other languages and scripts**. That’s why you have the choice between two modes:  
+- **Non-English Extraction**  
+- **Kashmiri-Only Extraction**  
+
+⚡ More features will be added over time.  
+💡 Feedback and collaboration welcome — reach out via my [contact form](https://www.raafatgilani.com/contact-10).
+""")
+
 mode = st.radio("Choose extraction mode:",["All Non-English words*", "Kashmiri words only*"])
 
 uploaded_file = st.file_uploader("Upload a TXT file", type=["txt"])
