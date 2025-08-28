@@ -31,7 +31,8 @@ st.title("Word Extractor")
 st.markdown("""
 This tool works on **dictionary-matching logic**.  
 That means occasional errors are expected: sometimes a word may be wrongly included or excluded.  
-The extractor is intentionally **tilted towards capturing more words**—better to have a few extras than to miss Kashmiri or non-English words entirely.  
+The extractor is intentionally **tilted towards capturing more words**—better to have a few extras than to miss Kashmiri or non-English words entirely.
+If you have a file in any other format other than .txt, I recommend using [Convertio](https://convertio.co/) for converting that file into .txt. I'm not affiliated with the app. Support for other file formats is coming soon! 
 
 Although the software is primarily designed to extract **Romanized Kashmiri words**, and accuracy improvements are geared toward that, it can also be used for **other languages and scripts**. That’s why you have the choice between two modes:  
 - **Non-English Extraction**  
