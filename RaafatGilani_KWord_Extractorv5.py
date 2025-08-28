@@ -28,7 +28,7 @@ Kwords = load_wordset("Kwords.txt")
 # =====================
 st.title("Kashmiri Word Extractor")
 
-mode = st.radio("Choose extraction mode:","All Non-English words*", "Kashmiri words only*")
+mode = st.radio("Choose extraction mode:",["All Non-English words*", "Kashmiri words only*"])
 
 uploaded_file = st.file_uploader("Upload a TXT file", type=["txt"])
 text = uploaded_file.read().decode("utf-8")
