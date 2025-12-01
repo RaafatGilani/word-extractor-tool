@@ -52,7 +52,7 @@ if uploaded_file is not None:
         text = re.sub(r"http\S+", "", text)                    # Remove URLs
         text = re.sub(r'(?<=\w)-(?=\w)', ' ', text)            # Fix hyphenated words
         text = re.sub(r'(?<=\w)—(?=\w)', ' ', text)            # Fix em-dash words
-        text = re.sub(r"[‘'…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
+        text = re.sub(r"[‘…–“”—©.,?%!:;()\[\]{}]", " ", text)  # Replace punctuation with space
         text = text.lower()
         text = re.sub(r"\d+", "", text)                        # Remove digits
 
