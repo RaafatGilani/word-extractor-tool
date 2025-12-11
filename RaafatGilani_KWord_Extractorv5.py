@@ -68,14 +68,6 @@ if uploaded_file is not None:
                     continue
                 elif word in Cwords:
                     continue
-                elif word in JKnames:
-                    continue
-                elif word in UHwords:
-                    container.append(word)
-                elif word in Kwords:
-                    container.append(word)
-                elif word in Pwords:
-                    container.append(word)
                 else:
                     container.append(word)
             return sorted(set(container))
